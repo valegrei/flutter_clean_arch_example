@@ -39,8 +39,8 @@ class AppTheme {
       fontSize: 16);
 
   static const TextTheme _lightTextTheme = TextTheme(
-    headline1: _lightHeadingText,
-    bodyText1: _lightBodyText,
+    headlineLarge: _lightHeadingText,
+    bodyLarge: _lightBodyText,
   );
 
   // *****************
@@ -53,8 +53,8 @@ class AppTheme {
       _lightBodyText.copyWith(color: _darkTextColorPrimary);
 
   static final TextTheme _darkTextTheme = TextTheme(
-    headline1: _darkThemeHeadingTextStyle,
-    bodyText1: _darkThemeBodyeTextStyle,
+    headlineLarge: _darkThemeHeadingTextStyle,
+    bodyLarge: _darkThemeBodyeTextStyle,
   );
 
   // *****************
@@ -66,7 +66,7 @@ class AppTheme {
       appBarTheme: const AppBarTheme(
           color: _appbarColorLight,
           iconTheme: IconThemeData(color: _iconColor)),
-      bottomAppBarColor: _appbarColorLight,
+      //bottomAppBarColor: _appbarColorLight,
       colorScheme: ColorScheme.light(
         primary: _lightPrimaryColor,
         onPrimary: _lightOnPrimaryColor,
@@ -80,7 +80,7 @@ class AppTheme {
       appBarTheme: AppBarTheme(
           color: _appbarColorDark,
           iconTheme: const IconThemeData(color: _iconColor)),
-      bottomAppBarColor: _appbarColorDark,
+      //bottomAppBarColor: _appbarColorDark,
       colorScheme: ColorScheme.dark(
         primary: _darkPrimaryColor,
         secondary: _accentColor,
