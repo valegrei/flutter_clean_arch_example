@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:advicer/0_data/exceptions/exceptions.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/advice_model.dart';
@@ -20,8 +21,11 @@ class AdviceRemoteDatasourceImpl implements AdviceRemoteDatasource{
     headers: {
       'content-type': 'application/json',
     },);
-    final responseBody = jsonDecode(response.body);
-    return AdviceModel.fromJson(responseBody);
+    if(response.statusCode != 200){
+      throw ServerException();
+    }else {
+      final responseBody = jsonDecode(response.body);
+      return AdviceModel.fromJson(responseBody);
+    }
   }
-
 }
