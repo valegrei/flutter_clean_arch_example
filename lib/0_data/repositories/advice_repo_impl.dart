@@ -5,20 +5,21 @@ import 'package:advicer/1_domain/failures/failures.dart';
 import 'package:advicer/1_domain/repositories/advice_repo.dart';
 import 'package:dartz/dartz.dart';
 
-class AdviceRepoImpl implements AdviceRepo{
-  final AdviceRemoteDatasource adviceRemoteDatasource = AdviceRemoteDatasourceImpl();
+class AdviceRepoImpl implements AdviceRepo {
+  final AdviceRemoteDatasource adviceRemoteDatasource;
+
+  AdviceRepoImpl({required this.adviceRemoteDatasource});
 
   @override
-  Future<Either<Failure, AdviceEntity>> getAdviceFromDatasource() async{
+  Future<Either<Failure, AdviceEntity>> getAdviceFromDatasource() async {
     try {
       final result = await adviceRemoteDatasource.getRandomAdviceFromApi();
       return right(result);
-    }on ServerException catch(_){
+    } on ServerException catch (_) {
       return left(ServerFailure());
-    }catch(e){
+    } catch (e) {
       //handle the exception
       return left(GeneralFailure());
     }
   }
-
 }
