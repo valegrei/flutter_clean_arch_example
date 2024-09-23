@@ -45,27 +45,37 @@ class AdvicerPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 50),
         child: Column(
           children: [
-            Expanded(child: Center(
-              child: BlocBuilder<AdvicerCubit, AdvicerCubitState>(
-                builder: (context, state) {
-                  if (state is AdvicerInitial) {
-                    return Text(
-                      'Your Advice is waiting for you!',
-                      style: themeData.textTheme.headlineLarge,
-                    );
-                  } else if (state is AdvicerStateLoading) {
-                    return CircularProgressIndicator(
-                        color: themeData.colorScheme.secondary);
-                  } else if (state is AdvicerStateLoaded) {
-                    return AdviceField(advice: state.advice);
-                  } else if (state is AdvicerStateError) {
-                    return ErrorMessage(message: state.message);
-                  }
-                  return const SizedBox();
-                },
+            Expanded(
+              child: Center(
+                child: BlocBuilder<AdvicerCubit, AdvicerCubitState>(
+                  builder: (context, state) {
+                    if (state is AdvicerInitial) {
+                      return Text(
+                        'Your Advice is waiting for you!',
+                        style: themeData.textTheme.headlineLarge,
+                      );
+                    } else if (state is AdvicerStateLoading) {
+                      return CircularProgressIndicator(
+                          color: themeData.colorScheme.secondary);
+                    } else if (state is AdvicerStateLoaded) {
+                      return AdviceField(advice: state.advice);
+                    } else if (state is AdvicerStateError) {
+                      return ErrorMessage(message: state.message);
+                    }
+                    return const SizedBox();
+                  },
+                ),
               ),
-            )),
-            const SizedBox(height: 200, child: Center(child: CustomButton())),
+            ),
+            SizedBox(
+              height: 200,
+              child: Center(
+                child: CustomButton(
+                  onTap: () =>
+                      BlocProvider.of<AdvicerCubit>(context).adviceRequest(),
+                ),
+              ),
+            ),
           ],
         ),
       ),
